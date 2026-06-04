@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base custom resets & utility styles */
+:root {
+  /* Elegant Soft Parchment Paper (High Density Design Theme) */
+  --bg-base: #fcfaf7;       /* Warm linen backdrop */
+  --bg-surface: #f8f6f2;    /* Slightly more tinted column workspace */
+  --text-primary: #2d2d2d;  /* Deep charcoal readable text */
+  --text-secondary: #5e5b55;/* Subtle metadata label */
+  --text-muted: #8e8a82;    /* Muted stamp labels */
+  --border: #e8e4df;        /* Clean folding divider lines */
+  --border-hover: #cbc8bc;  /* Hover divider lines */
+  --accent: #2d2d2d;        /* Solid solid dark accent */
+  --accent-muted: #6e6b63;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme="dark"] {
+  /* Elegant Distraction-Free dark mode */
+  --bg-base: #0f0f10;       /* Deep ink ash (gentle on the eye) */
+  --bg-surface: #171719;    /* Surface containers */
+  --text-primary: #e2dfd7;  /* High contrast but un-reflective off-white */
+  --text-secondary: #8c8980;/* Ash grey secondary text */
+  --text-muted: #595752;    /* Muted timestamp marks */
+  --border: #232220;        /* Restful subtle charcoal line */
+  --border-hover: #363431;  /* Hover line */
+  --accent: #e2dfd7;        /* Solid primary light accent */
+  --accent-muted: #8c8980;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Custom noise background overlay for tactile paper feel */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: var(--text-primary);
+  color: var(--bg-base);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Custom visual micro-details for handwritten/raw feeling */
+.custom-border-bottom {
+  border-bottom: 1px dashed var(--border);
+}
+
+.custom-border-right {
+  border-right: 1px dashed var(--border);
+}
+
+/* Typewriter flashing caret animation */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.caret-blink::after {
+  content: "▊";
+  animation: blink 1s step-end infinite;
+  color: var(--text-secondary);
+}
+
+/* Smooth content transition animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Fluid responsive CSS Grid variables */
+.asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .asymmetric-grid {
+    grid-template-columns: 380px 1fr;
+  }
+}
+
+/* Distraction free Prose typography */
+.prose-custom {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  letter-spacing: -0.011em;
+}
+
+.prose-custom h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.prose-custom h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-custom h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-custom p {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  opacity: 0.95;
+}
+
+.prose-custom blockquote {
+  border-left: 2px solid var(--text-muted);
+  padding-left: 1.5rem;
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: var(--text-secondary);
+  margin: 2.5rem 0;
+  font-size: 1.25rem;
+}
+
+.prose-custom code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.prose-custom pre {
+  margin: 2rem 0;
+  border-radius: 6px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+.prose-custom pre code {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 0.9em;
+}
+
+.prose-custom hr {
+  border: 0;
+  border-top: 1px dashed var(--border);
+  margin: 3rem 0;
+}
+
+.prose-custom ul, .prose-custom ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose-custom ul {
+  list-style-type: square;
+}
+
+.prose-custom ol {
+  list-style-type: decimal;
+}
+
+.prose-custom li {
+  margin-bottom: 0.5rem;
+}

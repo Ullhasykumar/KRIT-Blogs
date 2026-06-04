@@ -1,0 +1,6 @@
+{
+  "name": "Minimalist Engineering Log",
+  "description": "An elegant, handcrafted markdown-driven student engineering blog featuring a dark, distraction-free monochrome aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
